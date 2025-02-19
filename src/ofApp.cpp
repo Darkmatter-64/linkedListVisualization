@@ -1,8 +1,20 @@
 #include "ofApp.h"
+#include "linkedList.cpp"
+
+// Global variables
+int maxAmplitude;
+int ampOffset;
+
+LinkedList ll = LinkedList();
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	maxAmplitude = 20;
 
+	// For testing
+	ll.insertAtHead(50);
+	ll.insertAtHead(30);
+	ll.insertAtTail(25);
 }
 
 //--------------------------------------------------------------
@@ -12,6 +24,26 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	int yOffset = maxAmplitude;
+	int xOffset = 0;
+
+	if (ll.head != NULL) {
+		Node* curr = ll.head;
+		while (curr != NULL) {
+			if (curr->data + maxAmplitude > yOffset) {
+				yOffset = curr->data + maxAmplitude;
+			}
+			curr = curr->next;
+		}
+
+		curr = ll.head;
+		while (curr != NULL) {
+			ofDrawCircle(xOffset + curr->data, yOffset, curr->data);
+			xOffset += 2 * curr->data + 25;
+		}
+
+
+	}
 
 }
 
