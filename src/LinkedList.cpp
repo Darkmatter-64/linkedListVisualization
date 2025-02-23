@@ -84,8 +84,22 @@ public:
 		this->head = this->head->next;
 	}
 
-	void deleteAll() {
-		this->head = NULL;
+	void deleteTail() {
+		Node* temp = head;
+
+		// Check for empty list
+		if (head == NULL) {
+			return;
+		}
+
+		// Traverse the list
+		while (temp->next != NULL) {
+			if (temp->next->next == NULL) {
+				temp->next = NULL;
+				return;
+			}
+			temp = temp->next;
+		}
 	}
 
 
